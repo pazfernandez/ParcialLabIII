@@ -11,6 +11,34 @@ namespace Blockchain
     {
         static void Main(string[] args)
         {
+
+            Random rnd = new Random(DateTime.UtcNow.Millisecond);
+
+            //Generar el primer bloque de la cadena
+            IBlock genesis = new Block(new byte[] {0x00, 0x00, 0x00, 0x00, 0x00});
+
+            byte[] difficulty = new byte[] { 0x00, 0x00 };
+
+            //Genera una nueva cadena ya con el primer bloque 
+            Blockchain chain = new Blockchain(difficulty, genesis);
+            
+            //Generara 200 bloques
+            for(int i = 0; i < 200; i++)
+            {
+                var data = Enumerable.Range(0, 2256), Select(p => (byte)rnd.Next());
+                chain.Add(new Block(data.ToArray()));
+                Console.WriteLine(chain.LastOrDefault()?.ToString());
+
+                Console.WriteLine("Cadena esta validada: " + chain.IsValid());
+            }
+
+
+
+            Console.ReadLine();
+
+
+
+
         }
 
         //Interfaz del bloque, establece su composicion
@@ -31,6 +59,17 @@ namespace Blockchain
         //Clase bloque que implementa la interfaz
         public class Block:IBlock
         {
+            //Constructor Basico
+            public Block(byte[] data)
+            {
+                Data = data ?? throw new ArgumentNullException(nameof(data));
+                Nonce = 0;
+                PrevHash = new byte[] { 0x00 };
+                TimeStamp = DateTime.Now;
+
+            }
+
+
             //Todos los getter y setters de los atributos del bloque
             byte[] Data { get; }
             byte[] IBlock.Data => throw new NotImplementedException();
@@ -121,6 +160,7 @@ namespace Blockchain
             }*/
         }
 
+        //Funciones de generacion y validacion hash
         public static class BlockchainExtension
         {
             //Genera el Hash a partir de todos los datos que integran el bloque con un objeto de la clase SHA512

@@ -114,11 +114,85 @@ namespace Blockchain
                 return Items.GetEnumerator();
             }
 
-
+            
             /*IEnumerator<IBlock> IEnumerable<IBlock>.GetEnumerator()
             {
                 throw new NotImplementedException();
             }*/
+        }
+
+        public static class BlockchainExtension
+        {
+            //Genera el Hash a partir de todos los datos que integran el bloque con un objeto de la clase SHA512
+            public static byte[] GenerateHash(this IBlock block) { 
+                using(SHA512 sha = new SHA512Managed())
+                    using(MemoryStream st = new MemoryStream())
+                    using(BinaryWriter bw = new BinaryWriter(st))
+                {
+                    bw.Write(block.Data);
+                    bw.Write(block.Nonce);
+                    bw.Write(block.TimeStamp.ToBinary());
+                    bw.Write(block.PrevHash);
+
+                    var starr = st.ToArray();
+
+                    //Devuelve una serie de caracteres random que solo pueden ser generados con exactamente los mismos datos
+                    return sha.ComputeHash(starr);
+                }
+            
+            }
+
+            public static byte[] MineHash(this IBlock block, byte[] difficulty) {
+
+                if (difficulty == null) throw new ArgumentNullException(nameof(difficulty));
+
+                //Genera el hash del bloque segun la dificultad pasada como parametro
+                byte[] hash = new byte[0];
+                int d = difficulty.Length;
+
+                while (!hash.Take(2).SequenceEqual(difficulty))
+                {
+                    block.Nonce++;
+                    hash = block.GenerateHash();
+                }
+                
+                return hash;
+            }
+
+            public static bool IsValid(this IBlock block) {
+
+                //Genera el hash del bloque
+                var bk = block.GenerateHash();
+
+                //Compara el hash ya guardado en el bloque que le pasamos con el que generamos
+                return block.Hash.SequenceEqual(bk);
+            }
+
+            public static bool IsValidPrevBlock(this IBlock block, IBlock prevBlock) {
+
+                //Si el bloque previo es null tira una excepcion
+                if (prevBlock == null) throw new ArgumentNullException(nameof(prevBlock));
+
+                //Generamos el hash del bloque anterior
+                var prev = prevBlock.Hash.GenerateHash();
+
+                //Ve si el bloque previo es valido en cuanto al hash y compara el hash del bloque anterior con el hash del bloque anterior guardado en el siguiente
+                return prevBlock.IsValid() && block.PrevHash.SequenceEqual(prev);
+            
+            }
+
+
+            //Validamos un bloque
+            public static bool IsValid(this IEnumerable<IBlock> items)
+            {
+
+                var enumerable = items.ToList();
+                return enumerable.Zip(enumerable.Skip(1), Tuple.Create).All(block = block.Item2.IsValid() && block.Item2.Hash); //EL HASH ES HASH O ???
+
+
+            }
+
+
         }
 
     }

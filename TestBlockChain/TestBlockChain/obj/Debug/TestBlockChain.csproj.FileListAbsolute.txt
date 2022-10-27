@@ -1,8 +1,0 @@
-D:\Proyectos de Lab\TestBlockChain\TestBlockChain\bin\Debug\TestBlockChain.exe.config
-D:\Proyectos de Lab\TestBlockChain\TestBlockChain\bin\Debug\TestBlockChain.exe
-D:\Proyectos de Lab\TestBlockChain\TestBlockChain\bin\Debug\TestBlockChain.pdb
-D:\Proyectos de Lab\TestBlockChain\TestBlockChain\obj\Debug\TestBlockChain.csproj.AssemblyReference.cache
-D:\Proyectos de Lab\TestBlockChain\TestBlockChain\obj\Debug\TestBlockChain.csproj.SuggestedBindingRedirects.cache
-D:\Proyectos de Lab\TestBlockChain\TestBlockChain\obj\Debug\TestBlockChain.csproj.CoreCompileInputs.cache
-D:\Proyectos de Lab\TestBlockChain\TestBlockChain\obj\Debug\TestBlockChain.exe
-D:\Proyectos de Lab\TestBlockChain\TestBlockChain\obj\Debug\TestBlockChain.pdb

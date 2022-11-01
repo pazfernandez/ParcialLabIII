@@ -8,10 +8,10 @@ namespace Parcial2_LabIII_Blockchain
 {
     internal class Cuenta
     {
-        public String nombre;
-        public float debe;
-        public float haber;
-        public int tipo;
+        public String nombre { get; set; }
+        public float debe { get; set; }
+        public float haber { get; set; }
+        public int tipo { get; set; }
 
 
         public Cuenta(string nombre, float haber, int tipo)

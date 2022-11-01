@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace Parcial2_LabIII_Blockchain
     {
         public List<Block> Blocks { get; set; }
 
-        public List<Transaction> TempTransactions { get; set; }
+        public List<Cuenta> TempCuentas { get; set; }
 
         public const int Difficulty = 4;
 
@@ -20,15 +21,15 @@ namespace Parcial2_LabIII_Blockchain
         {
 
             Blocks = new List<Block>();
-            TempTransactions = new List<Transaction>();
+            TempCuentas = new List<Cuenta>();
         }
 
-        public void NewTransaction(string sender, string receiver, decimal amount)
+        public void NewCuenta(string nombre, float debeOHaber, int tipo)
         {
 
-            Transaction newTransaction = new Transaction(sender, receiver, amount);
+            Cuenta newCuenta = new Cuenta(nombre, debeOHaber, tipo);
 
-            TempTransactions.Add(newTransaction);
+            TempCuentas.Add(newCuenta);
         }
 
         public void NewBlock()
@@ -40,11 +41,11 @@ namespace Parcial2_LabIII_Blockchain
                 previousHash = Blocks[Blocks.Count - 1].Hash;
             }
 
-            Block newBlock = new Block(Blocks.Count, TempTransactions, previousHash);
+            Block newBlock = new Block(Blocks.Count, TempCuentas, previousHash);
             newBlock.MineBlock(Difficulty);
             Blocks.Add(newBlock);
 
-            TempTransactions = new List<Transaction>();
+            TempCuentas = new List<Cuenta>();
 
         }
 

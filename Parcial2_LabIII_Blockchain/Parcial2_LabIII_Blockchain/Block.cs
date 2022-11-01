@@ -14,7 +14,7 @@ namespace Parcial2_LabIII_Blockchain
 
         public DateTime Timestamp { get; set; }
 
-        public Transaction[] Transactions { get; set; }
+        public Cuenta[] Cuentas { get; set; }
 
         public string Hash { get; set; }
 
@@ -24,11 +24,11 @@ namespace Parcial2_LabIII_Blockchain
         public int proof { get; set; }
 
 
-        public Block(int index, List<Transaction> transactions, string previousHash)
+        public Block(int index, List<Cuenta> cuentas, string previousHash)
         {
 
             Id = index;
-            Transactions = transactions != null ? transactions.ToArray() : new Transaction[0];
+            Cuentas = cuentas != null ? cuentas.ToArray() : new Cuenta[0];
             Timestamp = DateTime.Now;
             PreviousHash = previousHash;
 

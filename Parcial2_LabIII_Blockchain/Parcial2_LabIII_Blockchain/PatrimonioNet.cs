@@ -8,7 +8,7 @@ namespace Parcial2_LabIII_Blockchain
 {
     internal class PatrimonioNet : Base
     {
-        public float saldoAcreedor;
+        public float saldoAcreedor { get; set; }
 
         public PatrimonioNet(float saldoAcreedor, String nombreCuenta, int id)
         {

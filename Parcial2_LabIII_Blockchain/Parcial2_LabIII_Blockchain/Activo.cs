@@ -8,10 +8,10 @@ namespace Parcial2_LabIII_Blockchain
 {
     internal class Activo : Base
     {
-        public float debe;
-        public float haber;
+        public float debe { get; set; }
+        public float haber { get; set; }
 
-        public float saldoDeudor;
+        public float saldoDeudor { get; set; }
 
         public Activo(float debe, float haber, float saldoDeudor, String nombreCuenta, int id)
         {

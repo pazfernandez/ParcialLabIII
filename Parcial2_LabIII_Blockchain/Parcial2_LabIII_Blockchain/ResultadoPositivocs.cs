@@ -8,7 +8,7 @@ namespace Parcial2_LabIII_Blockchain
 {
     internal class ResultadoPositivo : Base
     {
-        public float saldoDeudor;
+        public float saldoDeudor { get; set; }
 
 
         public ResultadoPositivo(float saldoDeudor, String nombreCuenta, int id)

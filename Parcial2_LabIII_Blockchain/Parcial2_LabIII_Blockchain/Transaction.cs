@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Parcial2_LabIII_Blockchain
 {
+    [Serializable]
     internal class Transaction
     {
         public int Id { get; set; }

@@ -6,3 +6,11 @@ D:\Facultad\Semestre_3\Laboratorio_3\Parcial2\Parcial2_LabIII_Blockchain\Parcial
 D:\Facultad\Semestre_3\Laboratorio_3\Parcial2\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\obj\Debug\Parcial2_LabIII_Blockchain.csproj.CoreCompileInputs.cache
 D:\Facultad\Semestre_3\Laboratorio_3\Parcial2\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\obj\Debug\Parcial2_LabIII_Blockchain.exe
 D:\Facultad\Semestre_3\Laboratorio_3\Parcial2\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\obj\Debug\Parcial2_LabIII_Blockchain.pdb
+C:\Users\octic\Source\Repos\ParcialLabIII\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\bin\Debug\Parcial2_LabIII_Blockchain.exe.config
+C:\Users\octic\Source\Repos\ParcialLabIII\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\bin\Debug\Parcial2_LabIII_Blockchain.exe
+C:\Users\octic\Source\Repos\ParcialLabIII\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\bin\Debug\Parcial2_LabIII_Blockchain.pdb
+C:\Users\octic\Source\Repos\ParcialLabIII\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\obj\Debug\Parcial2_LabIII_Blockchain.csproj.AssemblyReference.cache
+C:\Users\octic\Source\Repos\ParcialLabIII\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\obj\Debug\Parcial2_LabIII_Blockchain.csproj.SuggestedBindingRedirects.cache
+C:\Users\octic\Source\Repos\ParcialLabIII\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\obj\Debug\Parcial2_LabIII_Blockchain.csproj.CoreCompileInputs.cache
+C:\Users\octic\Source\Repos\ParcialLabIII\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\obj\Debug\Parcial2_LabIII_Blockchain.exe
+C:\Users\octic\Source\Repos\ParcialLabIII\Parcial2_LabIII_Blockchain\Parcial2_LabIII_Blockchain\obj\Debug\Parcial2_LabIII_Blockchain.pdb

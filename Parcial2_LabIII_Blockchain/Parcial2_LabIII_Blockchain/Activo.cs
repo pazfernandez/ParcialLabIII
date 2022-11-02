@@ -13,13 +13,11 @@ namespace Parcial2_LabIII_Blockchain
 
         public float saldoDeudor { get; set; }
 
-        public Activo(float debe, float haber, float saldoDeudor, String nombreCuenta, int id)
+        public Activo(float debe, float haber, String nombreCuenta)
         {
             this.debe = debe;
             this.haber = haber;
-            this.saldoDeudor = saldoDeudor;
             this.nombreCuenta = nombreCuenta;
-            this.id = id;
         }
     }
 }

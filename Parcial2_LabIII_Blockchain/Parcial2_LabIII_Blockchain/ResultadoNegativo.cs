@@ -8,14 +8,13 @@ namespace Parcial2_LabIII_Blockchain
 {
     internal class ResultadoNegativo : Base
     {
-        public float saldoAcreedor { get; set; }
+        public float saldoDeudor { get; set; }
 
-        public ResultadoNegativo(float saldoAcreedor, String nombreCuenta, int id)
+        public ResultadoNegativo(float saldoDeudor, String nombreCuenta)
         {
 
-            this.saldoAcreedor = saldoAcreedor;
+            this.saldoDeudor = saldoDeudor;
             this.nombreCuenta = nombreCuenta;
-            this.id = id;
         }
     }
 }

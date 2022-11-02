@@ -10,12 +10,11 @@ namespace Parcial2_LabIII_Blockchain
     {
         public float saldoAcreedor { get; set; }
 
-        public PatrimonioNet(float saldoAcreedor, String nombreCuenta, int id)
+        public PatrimonioNet(float saldoAcreedor, String nombreCuenta)
         {
 
             this.saldoAcreedor = saldoAcreedor;
             this.nombreCuenta = nombreCuenta;
-            this.id = id;
         }
     }
 }

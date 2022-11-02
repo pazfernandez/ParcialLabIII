@@ -27,20 +27,18 @@ namespace Parcial2_LabIII_Blockchain
             SerializoArchivo.GuardarCadena(Nodo);
 
             Nodo = SerializoArchivo.LeerCadena();
+
             if (Nodo != null)
             {
-
-                //PRUEBAS
-                Console.WriteLine(/*Imprimo algo de la blockchain*/);
-                /*Console.WriteLine(Nodo.Blocks[0].Cuentas[0].debe + Environment.NewLine +
-                              Nodo.Blocks[1].Cuentas[1].nombre + Environment.NewLine +
-                              Nodo.Blocks[0].Hash + Environment.NewLine +
-                              Nodo.Blocks[1].PreviousHash + Environment.NewLine);*/
+                //Si no es nulo llama al metodo para imprimir el libro diario
                 imprimirLibroDiario(Nodo);
             }
 
             Console.ReadKey();
         }
+
+
+
 
         //Usuario ingresa los datos que seran guardados en el blockchain
         public Blockchain InteraccionConUsuario()
@@ -101,7 +99,7 @@ namespace Parcial2_LabIII_Blockchain
                     do
                     {
                         fecha = Console.ReadLine();
-                    } while (!FormatoCorrecto(fecha));
+                    } while (!DateTime.TryParse(fecha, out DateTime theDate));
 
                     //Ingresar una cuenta nueva
                     do
@@ -181,8 +179,12 @@ namespace Parcial2_LabIII_Blockchain
             return Nodo;
         }
 
+
+
+
+
         //Metodo para validar el formato de la fecha pasada por el usuario
-        public bool FormatoCorrecto(String fecha)
+        /*public bool FormatoCorrecto(String fecha)
         {
 
             if(fecha == null)
@@ -197,34 +199,42 @@ namespace Parcial2_LabIII_Blockchain
             }
             
 
-        }
+        }*/
+
+
+
 
         public void imprimirLibroDiario(Blockchain Nodo)
         {
+            //Pasa por todas las entradas del libro (bloques del blockchain)
             for(int i = 0; i < Nodo.Blocks.Count; i++)
             {
-                Console.WriteLine("-------------------------------------"+i+1+"---------------------------------------------");
+                Console.WriteLine("-------------------------------------"+(i+1)+"---------------------------------------------");
+                //Imprime la fecha
                 Console.Write("| "+Nodo.Blocks[i].Fecha+" ");
 
+                //Pasa por todas las cuentas que componen cada accion contable
                 for (int j = 0; j < Nodo.Blocks[i].Cuentas.Length; j++)
                 {   if(j != 0)
                     {
                         Console.Write("|            ");
                     }
+                //Imprime el nombre de la cuenta
                     Console.Write("|" + Nodo.Blocks[i].Cuentas[j].nombre+"                      ");
+                    //Imprime el debe
                     Console.Write("| " + Nodo.Blocks[i].Cuentas[j].debe+"                ");
+                    //Imprime el haber
                     Console.WriteLine("| " + Nodo.Blocks[i].Cuentas[j].haber + "                |");
                 }
                 Console.WriteLine("|            |                                                                     |");
+                //Imprime la descripcion
                 Console.WriteLine("|            |      " + Nodo.Blocks[i].Descripcion + "              |");
             }
-
-
-
-
         }
 
         
+
+
 
         static void Main(string[] args)
         {
@@ -233,7 +243,11 @@ namespace Parcial2_LabIII_Blockchain
             Blockchain nodo = programa.InteraccionConUsuario();
             programa.Correr(nodo);
 
-            
+            Mayor mayor = new Mayor();
+            mayor.registrarMayores(nodo);
+
+            mayor.mostrarMayores();
+
         }
     }
 }

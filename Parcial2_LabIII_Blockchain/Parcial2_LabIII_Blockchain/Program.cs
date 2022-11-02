@@ -29,12 +29,14 @@ namespace Parcial2_LabIII_Blockchain
             Nodo = SerializoArchivo.LeerCadena();
             if (Nodo != null)
             {
+
+                //PRUEBAS
                 Console.WriteLine(/*Imprimo algo de la blockchain*/);
-                /*Console.WriteLine(Nodo.Blocks[0].Cuentas[0].monto + Environment.NewLine +
-                              Nodo.Blocks[1].Cuentas[2].nombre + Environment.NewLine +
+                /*Console.WriteLine(Nodo.Blocks[0].Cuentas[0].debe + Environment.NewLine +
+                              Nodo.Blocks[1].Cuentas[1].nombre + Environment.NewLine +
                               Nodo.Blocks[0].Hash + Environment.NewLine +
                               Nodo.Blocks[1].PreviousHash + Environment.NewLine);*/
-                Console.WriteLine(Nodo.Blocks[0].Cuentas[0].debe);
+                imprimirLibroDiario(Nodo);
             }
 
             Console.ReadKey();
@@ -48,8 +50,8 @@ namespace Parcial2_LabIII_Blockchain
 
 
             //Iran en el bloque junto con la lista de cuentas
-            String descripcion;
-            String fecha;
+            string descripcion;
+            string fecha;
 
 
             //Cuentas que habra dentro de un mismo bloque
@@ -58,91 +60,124 @@ namespace Parcial2_LabIII_Blockchain
             //Todos menos debeOHaber y fecha seran guardados en un objeto de tipo cuenta para ser agregados a un bloque
             
             int tipo;
-            String nombre;
+            string nombre;
             int debeOHaber;
             float monto;
 
-
-            Console.WriteLine("Añadir entrada al libro diario: ");
-            Console.WriteLine("Ingrese la fecha de la acción contable: xx/xx/xxxx");
-
-            //Lee y valida que la fecha sea correcta
-            do
-            {
-                fecha = Console.ReadLine();
-            }while (!FormatoCorrecto(fecha));
-
-            //Ingresar una cuenta nueva
+            bool nuevo = true;
             do
             {
 
 
-                Console.WriteLine("¿Quiere ingresar un cambio en una cuenta existente o nueva?");
-                Console.WriteLine("0_No   1_Activo   2_Pasivo   3_Patrimonio Neto   4_Resultado Negativo   5_Resultado Positivo");
-
+                Console.WriteLine("¿Añadir nueva entrada al libro diario? Y/N");
+                string yn;
 
                 do
                 {
-                    //Hay que agregar excepcion por si ingresan algo que no es un numero, asi no se rompe el programa
-                    tipo = Convert.ToInt32(Console.ReadLine());
-                } while (tipo > 5 || tipo < 0 || tipo == null);
 
-                //Si se quiere seguir agregando cuentas
-                if (tipo != 0)
+                    yn = Console.ReadLine().ToLower().Trim();
+
+
+                    if(yn == "y")
+                    {
+                        nuevo = true;
+                        yn = null;
+
+                    }else if(yn == "n")
+                    {
+                        nuevo= false;
+                        yn = null;
+                    }
+
+                } while (yn != null);
+
+                if (nuevo)
                 {
-                    Console.WriteLine("Ingrese el nombre de la cuenta: ");
+
+
+                    Console.WriteLine("Ingrese la fecha de la acción contable: xx/xx/xxxx");
+
+                    //Lee y valida que la fecha sea correcta
                     do
                     {
-                        nombre = Console.ReadLine();
-                    } while (nombre == null);
+                        fecha = Console.ReadLine();
+                    } while (!FormatoCorrecto(fecha));
 
-                    //Si la cuenta es de tipo activo o pasivo, se elige entre el debe o el haber
-                    if (tipo == 1 || tipo == 2)
+                    //Ingresar una cuenta nueva
+                    do
                     {
-                        Console.WriteLine("¿Quiere ingresar un monto en el haber o en el debe?");
-                        Console.WriteLine("0_Debe   1_Haber");
+
+                        Console.WriteLine();
+                        Console.WriteLine("¿Quiere ingresar un cambio en una cuenta existente o nueva?");
+                        Console.WriteLine("0_No   1_Activo   2_Pasivo   3_Patrimonio Neto   4_Resultado Negativo   5_Resultado Positivo");
+
 
                         do
                         {
                             //Hay que agregar excepcion por si ingresan algo que no es un numero, asi no se rompe el programa
-                            debeOHaber = Convert.ToInt32(Console.ReadLine());
-                        } while (debeOHaber != 0 && debeOHaber != 1);
-                    }
-                    else if (tipo == 4)
-                    {
-                        debeOHaber = 0; //Si es una perdida solo deja poner un monto en el debe
-                    }
-                    else //Si es PN o una ganancia, solo deja poner un monto en el haber
-                    {
-                        debeOHaber = 1;
-                    }
+                            tipo = Convert.ToInt32(Console.ReadLine());
+                        } while (tipo > 5 || tipo < 0 || tipo == null);
 
-                     Console.WriteLine("Ingrese un monto: ");
-                    //Ingresar un monto
+                        //Si se quiere seguir agregando cuentas
+                        if (tipo != 0)
+                        {
+                            Console.WriteLine("Ingrese el nombre de la cuenta: ");
+                            do
+                            {
+                                nombre = Console.ReadLine();
+                            } while (nombre == null);
+
+                            //Si la cuenta es de tipo activo o pasivo, se elige entre el debe o el haber
+                            if (tipo == 1 || tipo == 2)
+                            {
+                                Console.WriteLine("¿Quiere ingresar un monto en el haber o en el debe?");
+                                Console.WriteLine("0_Debe   1_Haber");
+
+                                do
+                                {
+                                    //Hay que agregar excepcion por si ingresan algo que no es un numero, asi no se rompe el programa
+                                    debeOHaber = Convert.ToInt32(Console.ReadLine());
+                                } while (debeOHaber != 0 && debeOHaber != 1);
+                            }
+                            else if (tipo == 4)
+                            {
+                                debeOHaber = 0; //Si es una perdida solo deja poner un monto en el debe
+                            }
+                            else //Si es PN o una ganancia, solo deja poner un monto en el haber
+                            {
+                                debeOHaber = 1;
+                            }
+
+                            Console.WriteLine("Ingrese un monto: ");
+                            //Ingresar un monto
+                            do
+                            {
+                                //Hay que agregar excepcion por si ingresan algo que no es un numero, asi no se rompe el programa
+                                monto = (float)Convert.ToDouble(Console.ReadLine());
+                            } while (monto == null);
+
+                            Nodo.NewCuenta(nombre, monto, tipo, debeOHaber);
+
+
+                        }
+
+
+
+                    } while (tipo != 0);
+
+                    Console.WriteLine("Ingrese la descripción de la acción contable: ");
                     do
                     {
-                        //Hay que agregar excepcion por si ingresan algo que no es un numero, asi no se rompe el programa
-                        monto = (float)Convert.ToDouble(Console.ReadLine());
-                    } while (monto == null);
+                        descripcion = Console.ReadLine();
 
-                    Nodo.NewCuenta(nombre, monto, tipo, debeOHaber);
+                    } while (descripcion == null);
 
-                    
+                    //Creacion del nuevo bloque (entrada de libro diario) con su fecha y descripcion
+                    Nodo.NewBlock(fecha, descripcion);
                 }
 
+            } while (nuevo);
 
-
-            } while (tipo != 0);
-            
-           Console.WriteLine("Ingrese la descripción de la acción contable: ");
-            do
-            {
-                descripcion = Console.ReadLine();
-
-            }while(descripcion == null);
-
-            //Creacion del nuevo bloque (entrada de libro diario) con su fecha y descripcion
-            Nodo.NewBlock(fecha, descripcion);
             return Nodo;
         }
 
@@ -164,6 +199,31 @@ namespace Parcial2_LabIII_Blockchain
 
         }
 
+        public void imprimirLibroDiario(Blockchain Nodo)
+        {
+            for(int i = 0; i < Nodo.Blocks.Count; i++)
+            {
+                Console.WriteLine("-------------------------------------"+i+1+"---------------------------------------------");
+                Console.Write("| "+Nodo.Blocks[i].Fecha+" ");
+
+                for (int j = 0; j < Nodo.Blocks[i].Cuentas.Length; j++)
+                {   if(j != 0)
+                    {
+                        Console.Write("|            ");
+                    }
+                    Console.Write("|" + Nodo.Blocks[i].Cuentas[j].nombre+"                      ");
+                    Console.Write("| " + Nodo.Blocks[i].Cuentas[j].debe+"                ");
+                    Console.WriteLine("| " + Nodo.Blocks[i].Cuentas[j].haber + "                |");
+                }
+                Console.WriteLine("|            |                                                                     |");
+                Console.WriteLine("|            |      " + Nodo.Blocks[i].Descripcion + "              |");
+            }
+
+
+
+
+        }
+
         
 
         static void Main(string[] args)
@@ -172,7 +232,6 @@ namespace Parcial2_LabIII_Blockchain
             Program programa = new Program();
             Blockchain nodo = programa.InteraccionConUsuario();
             programa.Correr(nodo);
-
 
             
         }

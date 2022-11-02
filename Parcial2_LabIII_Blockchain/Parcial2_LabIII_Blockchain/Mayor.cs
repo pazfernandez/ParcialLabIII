@@ -103,11 +103,9 @@ namespace Parcial2_LabIII_Blockchain
                             if (PatrimoniosNetos != null)
                             {
 
-
-                                //Pasar por cada pasivo en la lista
                                 for (int a = 0; a < PatrimoniosNetos.Count; a++)
                                 {
-                                    //Comparar nombre de la Cuenta con los nombres de los pasivos guardados
+
                                     if (PatrimoniosNetos[a].nombreCuenta.Equals(nombreCuenta))
                                     {
                                         PatrimoniosNetos[a].saldoAcreedor = Nodo.Blocks[i].Cuentas[j].haber + PatrimoniosNetos[a].saldoAcreedor;
@@ -135,10 +133,10 @@ namespace Parcial2_LabIII_Blockchain
                             {
 
 
-                                //Pasar por cada pasivo en la lista
+
                                 for (int a = 0; a < ResultadosNegativos.Count; a++)
                                 {
-                                    //Comparar nombre de la Cuenta con los nombres de los pasivos guardados
+
                                     if (ResultadosNegativos[a].nombreCuenta.Equals(nombreCuenta))
                                     {
                                         ResultadosNegativos[a].saldoDeudor = Nodo.Blocks[i].Cuentas[j].haber + ResultadosNegativos[a].saldoDeudor;
@@ -164,11 +162,9 @@ namespace Parcial2_LabIII_Blockchain
                             if (ResultadosPositivos != null)
                             {
 
-
-                                //Pasar por cada pasivo en la lista
                                 for (int a = 0; a < ResultadosPositivos.Count; a++)
                                 {
-                                    //Comparar nombre de la Cuenta con los nombres de los pasivos guardados
+ 
                                     if (ResultadosPositivos[a].nombreCuenta.Equals(nombreCuenta))
                                     {
                                         ResultadosPositivos[a].saldoAcreedor = Nodo.Blocks[i].Cuentas[j].debe + ResultadosPositivos[a].saldoAcreedor;
@@ -218,12 +214,13 @@ namespace Parcial2_LabIII_Blockchain
 
         public void mostrarMayores()
         {
+            //Cuenta los totales de cada fila
             double totalDebe = 0;
             double totalHaber = 0;
             double totalSD = 0;
             double totalSA = 0;
 
-
+            // -------------------- IMPRESION DEL LIBRO MAYOR ---------------------------
             Console.WriteLine("\n\n\n");
             Console.WriteLine("----  LIBRO DE MAYORES  ----");
             Console.WriteLine("------------------------------------------------------------------------------------------------------------");
@@ -311,7 +308,7 @@ namespace Parcial2_LabIII_Blockchain
                 }
             }
 
-
+            // ----------------------- IMPRESION DE LOS TOTALES ---------------------------
             Console.WriteLine("------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("TOTAL DEBE= "+ totalDebe);
             Console.WriteLine("TOTAL HABER= " + totalHaber);

@@ -41,10 +41,8 @@ namespace Parcial2_LabIII_Blockchain
 
 
         //Usuario ingresa los datos que seran guardados en el blockchain
-        public Blockchain InteraccionConUsuario()
+        public Blockchain InteraccionConUsuario(Blockchain Nodo)
         {
-            //Creacion del blockchain
-            Nodo = new Blockchain();
 
 
             //Iran en el bloque junto con la lista de cuentas
@@ -240,11 +238,16 @@ namespace Parcial2_LabIII_Blockchain
         {
 
             Program programa = new Program();
-            Blockchain nodo = programa.InteraccionConUsuario();
-            programa.Correr(nodo);
+            SerializarArchivo serializar = new SerializarArchivo();
+
+            //Creacion del blockchain
+            Blockchain Nodo = serializar.LeerCadena();
+
+            Nodo = programa.InteraccionConUsuario(Nodo);
+            programa.Correr(Nodo);
 
             Mayor mayor = new Mayor();
-            mayor.registrarMayores(nodo);
+            mayor.registrarMayores(Nodo);
 
             mayor.mostrarMayores();
 

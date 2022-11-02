@@ -48,5 +48,25 @@ namespace Parcial2_LabIII_Blockchain
 
         }
 
+        public void verificarHash(Blockchain nodo)
+        {
+            for (int i = 0; i < nodo.Blocks.Count - 1; i++)
+            {
+                if (!(nodo.Blocks[i].Hash.Equals(nodo.Blocks[i + 1].PreviousHash))) {
+                    Console.WriteLine("LOS BLOQUES HAN SIDO MODIFICADOS ILEGALMENTE! --- ERROR --- ");
+                    Console.WriteLine("ERROR 1");
+                    System.Environment.Exit(0);
+
+                }else if (!(nodo.Blocks[i].Hash.Equals(nodo.Blocks[i].MineBlockCopy(4)))){
+                    Console.WriteLine("LOS BLOQUES HAN SIDO MODIFICADOS ILEGALMENTE! --- ERROR --- ");
+                    Console.WriteLine("ERROR 2");
+                    System.Environment.Exit(0);
+                }
+                
+        }
+
+            Console.WriteLine("Bloques persistidos han pasado las pruebas de verificacion!");
+        }
+
     }
 }

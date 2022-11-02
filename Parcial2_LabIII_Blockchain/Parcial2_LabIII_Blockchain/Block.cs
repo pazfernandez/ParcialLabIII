@@ -74,6 +74,28 @@ namespace Parcial2_LabIII_Blockchain
 
         }
 
+        public string MineBlockCopy(int difficulty)
+        {
+
+            //string initialText = string.Format("{0}{1}", Id, Timestamp);
+            string initialText = string.Format("{0}{1}{2}", Id, Timestamp, Cuentas.Select(t => t.Hash).Aggregate((i, j) => i + j));      //Con esta funcion se concatenan todos los Hash dentro del bloque
+            proof = 0;
+            string text = string.Format("{0}{1}", initialText, proof);
+
+
+            while (!HashIsValid(text, difficulty))
+            {
+
+                proof++;
+                text = string.Format("{0}{1}", initialText, proof);
+            }
+
+            string hashCopy = HashHelper.CalculateHash(text);
+
+            return hashCopy;               //no es necesario este retorno
+
+        }
+
         #endregion Mining
 
     }

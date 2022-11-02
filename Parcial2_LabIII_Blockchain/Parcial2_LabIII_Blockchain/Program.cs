@@ -243,6 +243,8 @@ namespace Parcial2_LabIII_Blockchain
             //Creacion del blockchain
             Blockchain Nodo = serializar.LeerCadena();
 
+            Nodo.verificarHash(Nodo);
+
             Nodo = programa.InteraccionConUsuario(Nodo);
             programa.Correr(Nodo);
 

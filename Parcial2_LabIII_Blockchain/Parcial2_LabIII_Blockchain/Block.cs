@@ -9,6 +9,9 @@ namespace Parcial2_LabIII_Blockchain
     [Serializable]
     internal class Block
     {
+        public String Descripcion;
+
+        public String Fecha;
 
         public long Id { get; set; }
 
@@ -24,9 +27,10 @@ namespace Parcial2_LabIII_Blockchain
         public int proof { get; set; }
 
 
-        public Block(int index, List<Cuenta> cuentas, string previousHash)
+        public Block(int index, List<Cuenta> cuentas, string previousHash, String descripcion, String fecha)
         {
-
+            Fecha = fecha;
+            Descripcion = descripcion;
             Id = index;
             Cuentas = cuentas != null ? cuentas.ToArray() : new Cuenta[0];
             Timestamp = DateTime.Now;
@@ -52,7 +56,7 @@ namespace Parcial2_LabIII_Blockchain
         {
 
             //string initialText = string.Format("{0}{1}", Id, Timestamp);
-            string initialText = string.Format("{0}{1}{2}", Id, Timestamp, Transactions.Select(t => t.Hash).Aggregate((i, j) => i + j));      //Con esta funcion se concatenan todos los Hash dentro del bloque
+            string initialText = string.Format("{0}{1}{2}", Id, Timestamp, Cuentas.Select(t => t.Hash).Aggregate((i, j) => i + j));      //Con esta funcion se concatenan todos los Hash dentro del bloque
             proof = 0;
             string text = string.Format("{0}{1}", initialText, proof);
 

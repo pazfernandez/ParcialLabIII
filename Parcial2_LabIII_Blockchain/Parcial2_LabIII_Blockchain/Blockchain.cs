@@ -24,15 +24,14 @@ namespace Parcial2_LabIII_Blockchain
             TempCuentas = new List<Cuenta>();
         }
 
-        public void NewCuenta(string nombre, float debeOHaber, int tipo)
+        public void NewCuenta(string nombre, float monto, int tipo, int debeOHaber)
         {
-
-            Cuenta newCuenta = new Cuenta(nombre, debeOHaber, tipo);
+            Cuenta newCuenta = new Cuenta(nombre, tipo, monto, debeOHaber);
 
             TempCuentas.Add(newCuenta);
         }
 
-        public void NewBlock()
+        public void NewBlock(String fecha, String descripcion)
         {
 
             string previousHash = string.Empty;
@@ -41,7 +40,7 @@ namespace Parcial2_LabIII_Blockchain
                 previousHash = Blocks[Blocks.Count - 1].Hash;
             }
 
-            Block newBlock = new Block(Blocks.Count, TempCuentas, previousHash);
+            Block newBlock = new Block(Blocks.Count, TempCuentas, previousHash, descripcion, fecha);
             newBlock.MineBlock(Difficulty);
             Blocks.Add(newBlock);
 

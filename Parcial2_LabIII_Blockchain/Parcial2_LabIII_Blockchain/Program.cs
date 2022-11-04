@@ -99,25 +99,6 @@ namespace Parcial2_LabIII_Blockchain
 
 
 
-        //Metodo para validar el formato de la fecha pasada por el usuario
-        /*public bool FormatoCorrecto(String fecha)
-        {
-
-            if(fecha == null)
-            {
-                return false;
-            }else if (DateTime.TryParse(fecha, out DateTime theDate)) {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            
-
-        }*/
-
-
 
 
         public void imprimirLibroDiario(Blockchain Nodo)
@@ -177,7 +158,7 @@ namespace Parcial2_LabIII_Blockchain
                     //Ingresar una cuenta nueva
                     do
                     {
-                        cont = CrearEntradaCuenta(Nodo, primero);
+                        cont = CrearEntradaCuenta(Nodo, primero, fecha);
                         primero = false;
                     } while (cont);
 
@@ -192,7 +173,7 @@ namespace Parcial2_LabIII_Blockchain
                     Nodo.NewBlock(fecha, descripcion);
         }
 
-        public bool CrearEntradaCuenta(Blockchain Nodo, bool primero)
+        public bool CrearEntradaCuenta(Blockchain Nodo, bool primero, string fecha)
         {
             int tipo;
             string nombre;
@@ -250,7 +231,8 @@ namespace Parcial2_LabIII_Blockchain
                         monto = (float)Convert.ToDouble(Console.ReadLine());
                     } while (monto == null);
 
-                    Nodo.NewCuenta(nombre, monto, tipo, debeOHaber);
+                    
+                    Nodo.NewCuenta(nombre, monto, tipo, debeOHaber, fecha);
 
 
                 }
@@ -262,7 +244,7 @@ namespace Parcial2_LabIII_Blockchain
             catch(Exception e)
             {
                 Console.WriteLine("Ingreso incorrecto. Intente de nuevo.");
-                CrearEntradaCuenta(Nodo, primero);
+                CrearEntradaCuenta(Nodo, primero, fecha);
                 return false;
             }
             
@@ -274,6 +256,7 @@ namespace Parcial2_LabIII_Blockchain
 
         static void Main(string[] args)
         {
+            string yn;
 
             Program programa = new Program();
             SerializarArchivo serializar = new SerializarArchivo();
@@ -287,7 +270,22 @@ namespace Parcial2_LabIII_Blockchain
             programa.Correr(Nodo);
 
             Mayor mayor = new Mayor();
+            
             mayor.registrarMayores(Nodo);
+
+            do
+            {
+                Console.WriteLine("\n¿Quiere revisar algun Mayor especifico?  Y/N");
+                yn = Console.ReadLine().Trim().ToLower();
+
+                if (yn.Equals("y"))
+                {
+                    mayor.mostrarMayorElegido();
+                }
+
+            } while (!(yn.Equals("n")));
+
+            
 
             mayor.mostrarMayores();
 

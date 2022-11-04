@@ -45,8 +45,11 @@ namespace Parcial2_LabIII_Blockchain
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                Blockchain newBlockchain = new Blockchain();
+                return newBlockchain;
+
+                /*Console.WriteLine(ex.Message);
+                return null;*/
             }
         }
 

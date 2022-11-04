@@ -9,9 +9,9 @@ namespace Parcial2_LabIII_Blockchain
     [Serializable]
     internal class Block
     {
-        public String Descripcion;
+        public string Descripcion;
 
-        public String Fecha;
+        public string Fecha;
 
         public long Id { get; set; }
 

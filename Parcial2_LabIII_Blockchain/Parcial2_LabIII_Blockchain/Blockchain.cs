@@ -24,9 +24,9 @@ namespace Parcial2_LabIII_Blockchain
             TempCuentas = new List<Cuenta>();
         }
 
-        public void NewCuenta(string nombre, float monto, int tipo, int debeOHaber)
+        public void NewCuenta(string nombre, float monto, int tipo, int debeOHaber, string fecha)
         {
-            Cuenta newCuenta = new Cuenta(nombre, tipo, monto, debeOHaber);
+            Cuenta newCuenta = new Cuenta(nombre, tipo, monto, debeOHaber, fecha);
 
             TempCuentas.Add(newCuenta);
         }
@@ -54,12 +54,10 @@ namespace Parcial2_LabIII_Blockchain
             {
                 if (!(nodo.Blocks[i].Hash.Equals(nodo.Blocks[i + 1].PreviousHash))) {
                     Console.WriteLine("LOS BLOQUES HAN SIDO MODIFICADOS ILEGALMENTE! --- ERROR --- ");
-                    Console.WriteLine("ERROR 1");
                     System.Environment.Exit(0);
 
                 }else if (!(nodo.Blocks[i].Hash.Equals(nodo.Blocks[i].MineBlockCopy(4)))){
                     Console.WriteLine("LOS BLOQUES HAN SIDO MODIFICADOS ILEGALMENTE! --- ERROR --- ");
-                    Console.WriteLine("ERROR 2");
                     System.Environment.Exit(0);
                 }
                 

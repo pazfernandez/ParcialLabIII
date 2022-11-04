@@ -10,6 +10,7 @@ namespace Parcial2_LabIII_Blockchain
     {
         public String nombreCuenta { get; set; }
 
+        public List<Cuenta> registros { get; set; }
 
     }
 }

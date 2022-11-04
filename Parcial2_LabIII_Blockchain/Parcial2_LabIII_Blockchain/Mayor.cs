@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,20 +48,29 @@ namespace Parcial2_LabIII_Blockchain
                                     {
                                         Activos[a].debe = Nodo.Blocks[i].Cuentas[j].debe + Activos[a].debe;
                                         Activos[a].haber = Nodo.Blocks[i].Cuentas[j].haber + Activos[a].haber;
+
+                                        Activos[a].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                                         break;
                                     }
                                     else if (a == Activos.Count - 1)
                                     {
                                         Activo nuevoActivo = new Activo(Nodo.Blocks[i].Cuentas[j].debe, Nodo.Blocks[i].Cuentas[j].haber, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                         Activos.Add(nuevoActivo);
+                                        Activos[a+1].registros = new List<Cuenta>();
+                                        Activos[a+1].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                                     }
                                 }
                             }
                             else
                             {
+                                
                                 Activo nuevoActivo = new Activo(Nodo.Blocks[i].Cuentas[j].debe, Nodo.Blocks[i].Cuentas[j].haber, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                 Activos = new List<Activo>();
                                 Activos.Add(nuevoActivo);
+
+                                //Inicializacion de lista de resgistros en el nuevo activo
+                                Activos[0].registros = new List<Cuenta>();
+                                Activos[0].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                             }
 
 
@@ -80,12 +90,17 @@ namespace Parcial2_LabIII_Blockchain
                                     {
                                         Pasivos[a].debe = Nodo.Blocks[i].Cuentas[j].debe + Activos[a].debe;
                                         Pasivos[a].haber = Nodo.Blocks[i].Cuentas[j].haber + Activos[a].haber;
+
+                                        Pasivos[a].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                                         break;
                                     }
                                     else if(a == Pasivos.Count - 1)
                                     {
                                         Pasivo nuevoPasivo = new Pasivo(Nodo.Blocks[i].Cuentas[j].debe, Nodo.Blocks[i].Cuentas[j].haber, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                         Pasivos.Add(nuevoPasivo);
+
+                                        Pasivos[a + 1].registros = new List<Cuenta>();
+                                        Pasivos[a + 1].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                                     }
                                 }
                             }
@@ -94,6 +109,10 @@ namespace Parcial2_LabIII_Blockchain
                                 Pasivo nuevoPasivo = new Pasivo(Nodo.Blocks[i].Cuentas[j].debe, Nodo.Blocks[i].Cuentas[j].haber, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                 Pasivos = new List<Pasivo>();
                                 Pasivos.Add(nuevoPasivo);
+
+                                //Inicializacion de lista de resgistros en el nuevo activo
+                                Pasivos[0].registros = new List<Cuenta>();
+                                Pasivos[0].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                             }
 
                             break;
@@ -110,12 +129,17 @@ namespace Parcial2_LabIII_Blockchain
                                     {
                                         PatrimoniosNetos[a].saldoAcreedor = Nodo.Blocks[i].Cuentas[j].haber + PatrimoniosNetos[a].saldoAcreedor;
 
+                                        PatrimoniosNetos[a].registros.Add(Nodo.Blocks[i].Cuentas[j]);
+
                                         break;
                                     }
                                     else if (a == PatrimoniosNetos.Count - 1)
                                     {
                                         PatrimonioNet nuevoPatrimonioN = new PatrimonioNet(Nodo.Blocks[i].Cuentas[j].haber, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                         PatrimoniosNetos.Add(nuevoPatrimonioN);
+
+                                        PatrimoniosNetos[a + 1].registros = new List<Cuenta>();
+                                        PatrimoniosNetos[a + 1].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                                     }
                                 }
                             }
@@ -124,6 +148,10 @@ namespace Parcial2_LabIII_Blockchain
                                 PatrimonioNet nuevoPatrimonioN = new PatrimonioNet(Nodo.Blocks[i].Cuentas[j].haber, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                 PatrimoniosNetos = new List<PatrimonioNet>();
                                 PatrimoniosNetos.Add(nuevoPatrimonioN);
+
+                                //Inicializacion de lista de resgistros en el nuevo activo
+                                PatrimoniosNetos[0].registros = new List<Cuenta>();
+                                PatrimoniosNetos[0].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                             }
 
                             break;
@@ -141,12 +169,17 @@ namespace Parcial2_LabIII_Blockchain
                                     {
                                         ResultadosNegativos[a].saldoDeudor = Nodo.Blocks[i].Cuentas[j].haber + ResultadosNegativos[a].saldoDeudor;
 
+                                        ResultadosNegativos[a].registros.Add(Nodo.Blocks[i].Cuentas[j]);
+
                                         break;
                                     }
                                     else if (a == ResultadosNegativos.Count - 1)
                                     {
                                         ResultadoNegativo nuevoNegativo = new ResultadoNegativo(Nodo.Blocks[i].Cuentas[j].haber, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                         ResultadosNegativos.Add(nuevoNegativo);
+
+                                        ResultadosNegativos[a + 1].registros = new List<Cuenta>();
+                                        ResultadosNegativos[a + 1].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                                     }
                                 }
                             }
@@ -155,6 +188,10 @@ namespace Parcial2_LabIII_Blockchain
                                 ResultadoNegativo nuevoNegativo = new ResultadoNegativo(Nodo.Blocks[i].Cuentas[j].haber, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                 ResultadosNegativos = new List<ResultadoNegativo>();
                                 ResultadosNegativos.Add(nuevoNegativo);
+
+                                //Inicializacion de lista de resgistros en el nuevo activo
+                                ResultadosNegativos[0].registros = new List<Cuenta>();
+                                ResultadosNegativos[0].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                             }
                             break;
                         //Resultado Positivo
@@ -169,12 +206,17 @@ namespace Parcial2_LabIII_Blockchain
                                     {
                                         ResultadosPositivos[a].saldoAcreedor = Nodo.Blocks[i].Cuentas[j].debe + ResultadosPositivos[a].saldoAcreedor;
 
+                                        ResultadosPositivos[a].registros.Add(Nodo.Blocks[i].Cuentas[j]);
+
                                         break;
                                     }
                                     else if (a == ResultadosPositivos.Count - 1)
                                     {
                                         ResultadoPositivo nuevoPositivo = new ResultadoPositivo(Nodo.Blocks[i].Cuentas[j].debe, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                         ResultadosPositivos.Add(nuevoPositivo);
+
+                                        ResultadosPositivos[a + 1].registros = new List<Cuenta>();
+                                        ResultadosPositivos[a + 1].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                                     }
                                 }
                             }
@@ -183,6 +225,10 @@ namespace Parcial2_LabIII_Blockchain
                                 ResultadoPositivo nuevoPositivo = new ResultadoPositivo(Nodo.Blocks[i].Cuentas[j].debe, Nodo.Blocks[i].Cuentas[j].nombre.ToLower().Trim());
                                 ResultadosPositivos = new List<ResultadoPositivo>();
                                 ResultadosPositivos.Add(nuevoPositivo);
+
+                                //Inicializacion de lista de resgistros en el nuevo activo
+                                ResultadosPositivos[0].registros = new List<Cuenta>();
+                                ResultadosPositivos[0].registros.Add(Nodo.Blocks[i].Cuentas[j]);
                             }
                             break;
                     }
@@ -316,5 +362,300 @@ namespace Parcial2_LabIII_Blockchain
             Console.WriteLine("SALDO ACREEDOR TOTAL= " + totalSA);
             Console.WriteLine("------------------------------------------------------------------------------------------------------------");
         }
+
+
+        public void mostrarMayorElegido()
+        {
+            //Se guarda el formato en el que debe estar la fecha
+            var cultureInfo = new CultureInfo("nl-NL");
+            
+            int tipo = 0;
+            int numCuenta = 0;
+            string fecha;
+
+            DateTime fechaInicio;
+            DateTime fechaFin;
+
+            do
+            {
+                Console.WriteLine("Ingrese la fecha de inicio del intervalo necesitado: xx/xx/xxxx");
+
+                //Lee y valida que la fecha sea correcta
+                do
+                {
+                    fecha = Console.ReadLine();
+                } while (!DateTime.TryParse(fecha, out DateTime fechaA));
+
+                //Guarda la fecha de inicio en formato DateTime
+                fechaInicio = DateTime.Parse(fecha, cultureInfo, DateTimeStyles.NoCurrentDateDefault);
+
+                Console.WriteLine("Ingrese la fecha de fin del intervalo necesitado: xx/xx/xxxx");
+
+                //Lee y valida que la fecha sea correcta
+                do
+                {
+                    fecha = Console.ReadLine();
+                } while (!DateTime.TryParse(fecha, out DateTime fechaB));
+
+                //Guarda la fecha de inicio en formato DateTime
+                fechaFin = DateTime.Parse(fecha, cultureInfo, DateTimeStyles.NoCurrentDateDefault);
+            } while (fechaFin < fechaInicio); //Si fin esta antes que principio
+            
+
+
+            Console.WriteLine("Elija el tipo de cuenta del que quiere mostrar su mayor: ");
+            Console.WriteLine("1_Activo   2_Pasivo   3_Patrimonio Neto   4_Resultado Negativo   5_Resultado Positivo");
+
+            try
+            {
+                do
+                {
+                    tipo = Convert.ToInt32(Console.ReadLine());
+
+                } while (tipo > 5 || tipo < 1 || tipo == null);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error en el ingreso, intente de nuevo.");
+                mostrarMayorElegido();
+            }
+
+            Console.WriteLine("Ingrese el numero de la cuenta: ");
+            switch (tipo)
+            {
+                //Activo
+                case 1:
+
+                    if(Activos != null)
+                    {
+                        //Muestra la lista de cuentas
+                        for (int i = 0; i < Activos.Count; i++)
+                        {
+                            Console.Write((i + 1) + "- ");
+                            Console.WriteLine(Activos[i].nombreCuenta);
+                        }
+
+                        //Lee el numero de la cuenta que el usuario quiere ver
+                        try
+                        {
+                            do
+                            {
+                                numCuenta = Convert.ToInt32(Console.ReadLine());
+
+                            } while (numCuenta > Activos.Count + 1 || numCuenta < 1 || numCuenta == null);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error en el ingreso, intente de nuevo.");
+                            mostrarMayorElegido();
+                        }
+
+                        if(Activos[numCuenta - 1].registros != null)
+                        {
+                            Console.WriteLine(Activos[numCuenta - 1].registros[0].fecha);
+
+                            //Llamar a metodo que imprime los registros
+                            imprimirRegistros(Activos[numCuenta - 1].registros, fechaInicio, fechaFin);
+                        }
+                        
+
+                    }
+
+                    break;
+                //Pasivo
+                case 2:
+                    if (Pasivos != null)
+                    {
+                        for (int i = 0; i < Pasivos.Count; i++)
+                        {
+                            Console.Write((i + 1) + "- ");
+                            Console.WriteLine(Pasivos[i].nombreCuenta);
+                        }
+
+                        //Lee el numero de la cuenta que el usuario quiere ver
+                        try
+                        {
+                            do
+                            {
+                                numCuenta = Convert.ToInt32(Console.ReadLine());
+
+                            } while (numCuenta > Pasivos.Count + 1 || numCuenta < 1 || numCuenta == null);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error en el ingreso, intente de nuevo.");
+                            mostrarMayorElegido();
+                        }
+
+                        if (Pasivos[numCuenta - 1].registros != null)
+                        {
+                            Console.WriteLine(Pasivos[numCuenta - 1].registros[0].fecha);
+
+                            //Llamar a metodo que imprime los registros
+                            imprimirRegistros(Pasivos[numCuenta - 1].registros, fechaInicio, fechaFin);
+                        }
+
+                    }
+
+
+                    break;
+                //Patrimonio Neto
+                case 3:
+                    if (PatrimoniosNetos != null)
+                    {
+                        for (int i = 0; i < PatrimoniosNetos.Count; i++)
+                        {
+                            Console.Write((i + 1) + "- ");
+                            Console.WriteLine(PatrimoniosNetos[i].nombreCuenta);
+                        }
+                        //Lee el numero de la cuenta que el usuario quiere ver
+                        try
+                        {
+                            do
+                            {
+                                numCuenta = Convert.ToInt32(Console.ReadLine());
+
+                            } while (numCuenta > PatrimoniosNetos.Count + 1 || numCuenta < 1 || numCuenta == null);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error en el ingreso, intente de nuevo.");
+                            mostrarMayorElegido();
+                        }
+
+                        if (PatrimoniosNetos[numCuenta - 1].registros != null)
+                        {
+                            Console.WriteLine(PatrimoniosNetos[numCuenta - 1].registros[0].fecha);
+
+                            //Llamar a metodo que imprime los registros
+                            imprimirRegistros(PatrimoniosNetos[numCuenta - 1].registros, fechaInicio, fechaFin);
+                        }
+                    }
+
+
+                    break;
+                //Resultado Negativo
+                case 4:
+                    if (ResultadosNegativos != null)
+                    {
+                        for (int i = 0; i < ResultadosNegativos.Count; i++)
+                        {
+                            Console.Write((i + 1) + "- ");
+                            Console.WriteLine(ResultadosNegativos[i].nombreCuenta);
+                        }
+                        //Lee el numero de la cuenta que el usuario quiere ver
+                        try
+                        {
+                            do
+                            {
+                                numCuenta = Convert.ToInt32(Console.ReadLine());
+
+                            } while (numCuenta > ResultadosNegativos.Count + 1 || numCuenta < 1 || numCuenta == null);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error en el ingreso, intente de nuevo.");
+                            mostrarMayorElegido();
+                        }
+
+                        if (ResultadosNegativos[numCuenta - 1].registros != null)
+                        {
+                            Console.WriteLine(ResultadosNegativos[numCuenta - 1].registros[0].fecha);
+
+                            //Llamar a metodo que imprime los registros
+                            imprimirRegistros(ResultadosNegativos[numCuenta - 1].registros, fechaInicio, fechaFin);
+                        }
+                    }
+
+
+                    break;
+                //Resultado Positivo
+                case 5:
+                    if (ResultadosPositivos != null)
+                    {
+                        for (int i = 0; i < ResultadosPositivos.Count; i++)
+                        {
+                            Console.Write((i + 1) + "- ");
+                            Console.WriteLine(ResultadosPositivos[i].nombreCuenta);
+                        }
+                        //Lee el numero de la cuenta que el usuario quiere ver
+                        try
+                        {
+                            do
+                            {
+                                numCuenta = Convert.ToInt32(Console.ReadLine());
+
+                            } while (numCuenta > ResultadosPositivos.Count + 1 || numCuenta < 1 || numCuenta == null);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error en el ingreso, intente de nuevo.");
+                            mostrarMayorElegido();
+                        }
+
+                        if (ResultadosPositivos[numCuenta - 1].registros != null)
+                        {
+                            Console.WriteLine(ResultadosPositivos[numCuenta - 1].registros[0].fecha);
+
+                            //Llamar a metodo que imprime los registros
+                            imprimirRegistros(ResultadosPositivos[numCuenta - 1].registros, fechaInicio, fechaFin);
+                        }
+                    }
+
+
+                    break;
+            }
+
+
+        }
+
+        public void imprimirRegistros(List<Cuenta> registros, DateTime fechaInicio, DateTime fechaFin)
+        {
+
+            //Se guarda el formato en el que debe estar la fecha
+            var cultureInfo = new CultureInfo("nl-NL");
+            DateTime fechaReg;
+            double debet = 0;
+            double habert = 0;
+            int tipo = registros[0].tipo;
+
+            Console.WriteLine("------------ " + registros[0].nombre.ToUpper() + " ------------- ");
+            
+
+            //Pasa por todos los registros de esa cuenta
+            for (int i = 0; i < registros.Count; i++)
+            {
+                
+                //Guarda la fecha del registro de inicio en formato DateTime
+                fechaReg = DateTime.Parse(registros[i].fecha, cultureInfo, DateTimeStyles.NoCurrentDateDefault);
+
+                //Si la fecha del registro esta en el intervalo pedido
+                if(fechaReg >= fechaInicio && fechaReg <= fechaFin)
+                {
+                    Console.Write("| "+registros[i].fecha+" | ");
+                    Console.Write(registros[i].debe + "  | ");
+                    Console.WriteLine(registros[i].haber);
+
+                    debet += registros[i].debe;
+                    habert += registros[i].haber;
+                }
+
+                
+            }
+            Console.WriteLine("--------------------------------------------\n");
+            Console.WriteLine("TOTAL DEBE: " + debet);
+            Console.WriteLine("TOTAL HABER: " + habert);
+
+            if (tipo == 1 || tipo == 4)
+            {
+                Console.WriteLine("SALDO DEUDOR: " + (debet - habert));
+            }
+            else
+            {
+                Console.WriteLine("SALDO ACREEDOR: " + (habert - debet));
+            }
+        }
+
+
     }
 }
